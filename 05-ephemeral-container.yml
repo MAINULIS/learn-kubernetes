@@ -1,0 +1,4 @@
+##Ephemeral containers are a special type of container in Kubernetes designed for temporary, user-initiated actions, primarily for debugging and troubleshooting within an existing Pod.
+
+# Assume pod init-container is already there.
+# kubectl debug -it --attach=true -c debugger --image=redhat/ubi9 pod-init-container
