@@ -1,4 +1,5 @@
 # Replica set
+# if I change version or any thing, replica set can't update that automatically.
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
