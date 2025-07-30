@@ -1,0 +1,41 @@
+# Node affinity is conceptually similar to nodeSelector, allowing you to constrain which nodes your Pod can be scheduled on based on node labels.
+# kubectl label node ip-172-31-21-89.ec2.internal affinity1=one
+# kubectl label node ip-172-31-25-174.ec2.internal affinity1=one
+# kubectl label node ip-172-31-44-136.ec2.internal affinity1=one
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: with-node-affinity
+spec:
+  containers:
+    - name: nginx
+      image: nginx:1.14.2
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: affinity1
+                operator: In
+                values:
+                  - "two"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: with-node-preferred-affinity
+spec:
+  containers:
+    - name: nginx
+      image: nginx:1.14.2
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 1
+          preference:
+            matchExpressions:
+              - key: affinity1
+                operator: In
+                values:
+                  - two
