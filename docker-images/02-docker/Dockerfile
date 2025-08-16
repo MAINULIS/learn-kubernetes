@@ -3,6 +3,8 @@ ADD            sample.txt /opt/sample.txt
 ARG			   URL
 RUN            echo $URL
 ENV            URL1=google.com
+RUN            dnf install iputils* -y
 USER           bin
 WORKDIR         /etc
-ENTRYPOINT     ["id"]
+# ENTRYPOINT     ["id"]
+ENTRYPOINT     ["ping", "-c", "3"]
